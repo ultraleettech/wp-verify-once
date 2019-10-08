@@ -1,0 +1,28 @@
+{
+    "name": "ultraleet/wp-verify-once",
+    "description": "VerifyOnce verification service integration with user login.",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rene Aavik",
+            "email": "renx81@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/ultraleettech/verify-once"
+        }
+    ],
+    "require": {
+        "ultraleet/wp-requirements-checker": "^1.0",
+        "ultraleet/verify-once": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ultraleet\\WP\\VerifyOnce\\": "classes/"
+        }
+    }
+}
