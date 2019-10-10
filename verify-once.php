@@ -18,6 +18,11 @@
 use Ultraleet\WP\VerifyOnce\Plugin;
 use Ultraleet\WP\RequirementsChecker;
 
+define('ULTRALEET_VO_TEXTDOMAIN', 'verify-once');
+define('ULTRALEET_VO_FILE', __FILE__);
+define('ULTRALEET_VO_PATH', __DIR__ . DIRECTORY_SEPARATOR);
+define('ULTRALEET_VO_CONFIG_PATH', ULTRALEET_VO_PATH . 'config' . DIRECTORY_SEPARATOR);
+
 // setup autoload
 require_once('vendor/autoload.php');
 

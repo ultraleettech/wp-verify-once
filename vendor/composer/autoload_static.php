@@ -17,6 +17,7 @@ class ComposerStaticInit93ff6d8c7db9cacc138ce185d6ad3047
         'U' => 
         array (
             'Ultraleet\\WP\\VerifyOnce\\' => 24,
+            'Ultraleet\\WP\\Settings\\' => 22,
             'Ultraleet\\WP\\' => 13,
             'Ultraleet\\VerifyOnce\\' => 21,
         ),
@@ -44,6 +45,10 @@ class ComposerStaticInit93ff6d8c7db9cacc138ce185d6ad3047
         'Ultraleet\\WP\\VerifyOnce\\' => 
         array (
             0 => __DIR__ . '/../..' . '/classes',
+        ),
+        'Ultraleet\\WP\\Settings\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/ultraleet/wp-settings/src',
         ),
         'Ultraleet\\WP\\' => 
         array (

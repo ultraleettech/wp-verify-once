@@ -12,7 +12,8 @@
     "minimum-stability": "stable",
     "require": {
         "ultraleet/wp-requirements-checker": "^1.0",
-        "ultraleet/verify-once": "dev-master"
+        "ultraleet/verify-once": "dev-master",
+        "ultraleet/wp-settings": "^0.1.0"
     },
     "autoload": {
         "psr-4": {

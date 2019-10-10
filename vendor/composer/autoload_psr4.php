@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Ultraleet\\WP\\VerifyOnce\\' => array($baseDir . '/classes'),
+    'Ultraleet\\WP\\Settings\\' => array($vendorDir . '/ultraleet/wp-settings/src'),
     'Ultraleet\\WP\\' => array($vendorDir . '/ultraleet/wp-requirements-checker/src'),
     'Ultraleet\\VerifyOnce\\' => array($vendorDir . '/ultraleet/verify-once/src'),
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-message/src'),

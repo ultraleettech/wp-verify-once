@@ -459,5 +459,43 @@
             }
         ],
         "description": "Helper library for WordPress plugins to check for minimum PHP and WP versions."
+    },
+    {
+        "name": "ultraleet/wp-settings",
+        "version": "0.1.0",
+        "version_normalized": "0.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ultraleettech/wp-settings.git",
+            "reference": "1d1280818182638bcf723157c6cf30e26494a91d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ultraleettech/wp-settings/zipball/1d1280818182638bcf723157c6cf30e26494a91d",
+            "reference": "1d1280818182638bcf723157c6cf30e26494a91d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=7.2"
+        },
+        "time": "2019-10-10T11:52:58+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Ultraleet\\WP\\Settings\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Rene Aavik",
+                "email": "renx81@gmail.com"
+            }
+        ],
+        "description": "WordPress settings abstraction library for simplifying creation of plugin settings pages."
     }
 ]

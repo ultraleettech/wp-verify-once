@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0cec383164e236ff69e8d163e6b1696d",
+    "content-hash": "c6a62466f151535eb2436cee9fccc50d",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -448,6 +448,42 @@
             ],
             "description": "Helper library for WordPress plugins to check for minimum PHP and WP versions.",
             "time": "2019-10-10T05:24:36+00:00"
+        },
+        {
+            "name": "ultraleet/wp-settings",
+            "version": "0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ultraleettech/wp-settings.git",
+                "reference": "1d1280818182638bcf723157c6cf30e26494a91d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ultraleettech/wp-settings/zipball/1d1280818182638bcf723157c6cf30e26494a91d",
+                "reference": "1d1280818182638bcf723157c6cf30e26494a91d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ultraleet\\WP\\Settings\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Rene Aavik",
+                    "email": "renx81@gmail.com"
+                }
+            ],
+            "description": "WordPress settings abstraction library for simplifying creation of plugin settings pages.",
+            "time": "2019-10-10T11:52:58+00:00"
         }
     ],
     "packages-dev": [],
