@@ -241,6 +241,53 @@
         ]
     },
     {
+        "name": "myclabs/php-enum",
+        "version": "1.7.2",
+        "version_normalized": "1.7.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/myclabs/php-enum.git",
+            "reference": "45f01adf6922df6082bcda36619deb466e826acf"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/myclabs/php-enum/zipball/45f01adf6922df6082bcda36619deb466e826acf",
+            "reference": "45f01adf6922df6082bcda36619deb466e826acf",
+            "shasum": ""
+        },
+        "require": {
+            "ext-json": "*",
+            "php": ">=7.1"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "^4.8.35|^5.7|^6.0",
+            "squizlabs/php_codesniffer": "1.*"
+        },
+        "time": "2019-08-19T13:53:00+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "MyCLabs\\Enum\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP Enum contributors",
+                "homepage": "https://github.com/myclabs/php-enum/graphs/contributors"
+            }
+        ],
+        "description": "PHP Enum implementation",
+        "homepage": "http://github.com/myclabs/php-enum",
+        "keywords": [
+            "enum"
+        ]
+    },
+    {
         "name": "psr/http-message",
         "version": "1.0.1",
         "version_normalized": "1.0.1.0",
@@ -341,30 +388,32 @@
         "source": {
             "type": "git",
             "url": "https://github.com/ultraleettech/verify-once.git",
-            "reference": "129b12e362ccefd13f0e8a43529833f9c9a9e758"
+            "reference": "fc9628be31081632999340d885d408e1674076db"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/ultraleettech/verify-once/zipball/129b12e362ccefd13f0e8a43529833f9c9a9e758",
-            "reference": "129b12e362ccefd13f0e8a43529833f9c9a9e758",
+            "url": "https://api.github.com/repos/ultraleettech/verify-once/zipball/fc9628be31081632999340d885d408e1674076db",
+            "reference": "fc9628be31081632999340d885d408e1674076db",
             "shasum": ""
         },
         "require": {
             "firebase/php-jwt": "^5.0",
             "guzzlehttp/guzzle": "^6.3",
+            "myclabs/php-enum": "^1.7",
             "php": ">=7.2"
         },
         "require-dev": {
             "phpunit/phpunit": "^8.4"
         },
-        "time": "2019-10-08T16:58:32+00:00",
+        "time": "2019-10-09T13:42:19+00:00",
         "type": "library",
-        "installation-source": "source",
+        "installation-source": "dist",
         "autoload": {
             "psr-4": {
                 "Ultraleet\\VerifyOnce\\": "src/"
             }
         },
+        "notification-url": "https://packagist.org/downloads/",
         "license": [
             "MIT"
         ],
@@ -374,28 +423,24 @@
                 "email": "renx81@gmail.com"
             }
         ],
-        "description": "VerifyOnce verification service integration library.",
-        "support": {
-            "source": "https://github.com/ultraleettech/verify-once/tree/master",
-            "issues": "https://github.com/ultraleettech/verify-once/issues"
-        }
+        "description": "VerifyOnce verification service integration library."
     },
     {
         "name": "ultraleet/wp-requirements-checker",
-        "version": "1.0.0",
-        "version_normalized": "1.0.0.0",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/ultraleettech/wp-requirements-checker.git",
-            "reference": "e27bd8c8cd8bbd48405355cd84267f865938ec8d"
+            "reference": "a43d09a937c6c7667acfc7d21804d288d7a6b1cc"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/ultraleettech/wp-requirements-checker/zipball/e27bd8c8cd8bbd48405355cd84267f865938ec8d",
-            "reference": "e27bd8c8cd8bbd48405355cd84267f865938ec8d",
+            "url": "https://api.github.com/repos/ultraleettech/wp-requirements-checker/zipball/a43d09a937c6c7667acfc7d21804d288d7a6b1cc",
+            "reference": "a43d09a937c6c7667acfc7d21804d288d7a6b1cc",
             "shasum": ""
         },
-        "time": "2019-10-08T08:37:18+00:00",
+        "time": "2019-10-10T05:24:36+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {

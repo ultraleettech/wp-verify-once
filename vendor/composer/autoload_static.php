@@ -24,6 +24,10 @@ class ComposerStaticInit93ff6d8c7db9cacc138ce185d6ad3047
         array (
             'Psr\\Http\\Message\\' => 17,
         ),
+        'M' => 
+        array (
+            'MyCLabs\\Enum\\' => 13,
+        ),
         'G' => 
         array (
             'GuzzleHttp\\Psr7\\' => 16,
@@ -52,6 +56,10 @@ class ComposerStaticInit93ff6d8c7db9cacc138ce185d6ad3047
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
+        ),
+        'MyCLabs\\Enum\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/myclabs/php-enum/src',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

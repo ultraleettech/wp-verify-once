@@ -10,12 +10,6 @@
         }
     ],
     "minimum-stability": "stable",
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/ultraleettech/verify-once"
-        }
-    ],
     "require": {
         "ultraleet/wp-requirements-checker": "^1.0",
         "ultraleet/verify-once": "dev-master"
