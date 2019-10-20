@@ -12,8 +12,6 @@ use Ultraleet\WP\Settings\Exceptions\MissingArgumentException;
  */
 class Settings
 {
-    const VERSION = '0.1.0';
-
     protected $pluginBaseFile;
     protected $prefix;
     protected $assetsPath;
@@ -312,7 +310,7 @@ HTML;
         foreach ($this->getPage($pageId)->getSections() as $sectionId => $section) {
             $section->saveSettings();
         }
-        wp_safe_redirect(add_query_arg(['updated' => $pageId], $_SERVER['HTTP_REFERER']));
+        wp_safe_redirect(add_query_arg(['updated' => 1], $_SERVER['HTTP_REFERER']));
         exit;
     }
 

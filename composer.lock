@@ -451,16 +451,16 @@
         },
         {
             "name": "ultraleet/wp-settings",
-            "version": "0.1.0",
+            "version": "0.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ultraleettech/wp-settings.git",
-                "reference": "1d1280818182638bcf723157c6cf30e26494a91d"
+                "reference": "6b36a5c22bf496218cfded1590814c627772c816"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ultraleettech/wp-settings/zipball/1d1280818182638bcf723157c6cf30e26494a91d",
-                "reference": "1d1280818182638bcf723157c6cf30e26494a91d",
+                "url": "https://api.github.com/repos/ultraleettech/wp-settings/zipball/6b36a5c22bf496218cfded1590814c627772c816",
+                "reference": "6b36a5c22bf496218cfded1590814c627772c816",
                 "shasum": ""
             },
             "require": {
@@ -483,7 +483,7 @@
                 }
             ],
             "description": "WordPress settings abstraction library for simplifying creation of plugin settings pages.",
-            "time": "2019-10-10T11:52:58+00:00"
+            "time": "2019-10-20T10:29:17+00:00"
         }
     ],
     "packages-dev": [],
