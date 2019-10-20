@@ -33,5 +33,5 @@ $requirementsChecker = new RequirementsChecker(array(
     'file' => __FILE__,
 ));
 if ($requirementsChecker->passes()) {
-    new Plugin();
+    Plugin::create();
 }

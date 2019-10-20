@@ -14,7 +14,7 @@ class Menu
 
         add_options_page(
             __('VerifyOnce Settings', ULTRALEET_VO_TEXTDOMAIN),
-            __('VerifyOnce Settings', ULTRALEET_VO_TEXTDOMAIN),
+            __('VerifyOnce', ULTRALEET_VO_TEXTDOMAIN),
             'manage_options',
             'verify-once-settings',
             [$this, 'settings']
