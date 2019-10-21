@@ -38,7 +38,6 @@ class Verification
             $transactionId = $response->getTransactionId();
 
             update_user_meta($user->ID, '_vo_transaction_id', $transactionId);
-            update_user_meta($user->ID, '_vo_redirect_url', $_SERVER['HTTP_REFERER']);
 
             wp_logout();
 
@@ -128,7 +127,7 @@ class Verification
             $isVerified = get_user_meta($user->ID, '_vo_verified', true);
             $response = ['status' => $isVerified ? 'verified' : 'pending'];
             if ($isVerified) {
-                $response['redirect'] = get_user_meta($user->ID, '_vo_redirect_url', true);
+                $response['redirect'] = wp_login_url();
             }
             wp_send_json($response);
         }
