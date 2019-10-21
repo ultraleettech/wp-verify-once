@@ -2,8 +2,10 @@
 
 namespace Ultraleet\WP\VerifyOnce;
 
+use Psr\Log\LoggerInterface;
 use Ultraleet\WP\VerifyOnce\Admin\Main as Admin;
 use Ultraleet\WP\VerifyOnce\Managers\ApiManager;
+use Ultraleet\WP\VerifyOnce\Managers\LogManager;
 use Ultraleet\WP\VerifyOnce\Managers\SettingsManager;
 
 /**
@@ -17,10 +19,15 @@ use Ultraleet\WP\VerifyOnce\Managers\SettingsManager;
  */
 final class Plugin
 {
+    /**
+     * @var self
+     */
     private static $instance;
+
     private $settings;
     private $admin;
     private $api;
+    private $logManager;
 
     private function __construct()
     {
@@ -39,6 +46,12 @@ final class Plugin
     public static function get(): self
     {
         return self::$instance;
+    }
+
+    public static function log(bool $callback = false): LoggerInterface
+    {
+        $manager = self::$instance->getLogManager();
+        return $callback ? $manager->getCallbackLogger() : $manager->getLogger();
     }
 
     public function init()
@@ -67,6 +80,14 @@ final class Plugin
             $this->api = new ApiManager($this->getSettings());
         }
         return $this->api;
+    }
+
+    public function getLogManager(): LogManager
+    {
+        if (! isset($this->logManager)) {
+            $this->logManager = new LogManager();
+        }
+        return $this->logManager;
     }
 
     /**

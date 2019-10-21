@@ -23,6 +23,7 @@ define('ULTRALEET_VO_FILE', __FILE__);
 define('ULTRALEET_VO_PATH', __DIR__ . DIRECTORY_SEPARATOR);
 define('ULTRALEET_VO_CONFIG_PATH', ULTRALEET_VO_PATH . 'config' . DIRECTORY_SEPARATOR);
 define('ULTRALEET_VO_TEMPLATE_PATH', ULTRALEET_VO_PATH . 'templates' . DIRECTORY_SEPARATOR);
+define('ULTRALEET_VO_LOG_PATH', wp_upload_dir()['basedir'] . DIRECTORY_SEPARATOR . 'verify-once' . DIRECTORY_SEPARATOR);
 
 // setup autoload
 require_once('vendor/autoload.php');

@@ -9,6 +9,11 @@ use Ultraleet\WP\VerifyOnce\Managers\ApiManager;
 use Ultraleet\VerifyOnce\Types\VerificationStatus;
 use Ultraleet\WP\VerifyOnce\Managers\SettingsManager;
 
+/**
+ * Class Verification
+ *
+ * Main verification integration class.
+ */
 class Verification
 {
     public function __construct()
@@ -42,6 +47,11 @@ class Verification
             wp_logout();
 
             include(ULTRALEET_VO_TEMPLATE_PATH . 'verify-login.php');
+
+            Plugin::log()->info(
+                "Initiated login verification for user #{$user->ID} ({$user->user_email})",
+                $response->toArray()
+            );
             die;
         }
     }
@@ -50,25 +60,36 @@ class Verification
      * Verification callback entry point.
      *
      * @throws Exception
-     *
-     * @todo Log errors
      */
     public function callback()
     {
         if (isset($_GET['action']) && 'verify-once-callback' === $_GET['action']) {
-            $body = file_get_contents('php://input');
-            if (! $info =  $this->getApi()->verify($body)) {
-                throw new Exception("Error verifying transaction payload.");
-            }
-            $transactionId = $info->transaction->id;
-            $user = $this->getUserByTransactionId($transactionId);
-            if (! $this->verifyUser($user, $info)) {
-                throw new Exception("Unable to verify user #{$user->ID}.");
-            }
-            update_user_meta($user->ID, '_vo_callback_info', $info->toArray());
-            update_user_meta($user->ID, '_vo_verified', true);
+            try {
+                $body = file_get_contents('php://input');
+                Plugin::log(true)->debug("Received callback from API: $body");
+                if (!$info = $this->getApi()->verify($body)) {
+                    throw new Exception("Error verifying transaction payload.");
+                }
+                $transactionId = $info->transaction->id;
+                $user = $this->getUserByTransactionId($transactionId);
+                if (!$this->verifyUser($user, $info)) {
+                    throw new Exception("Unable to verify user #{$user->ID}.");
+                }
+                update_user_meta($user->ID, '_vo_callback_info', $info->toArray());
+                update_user_meta($user->ID, '_vo_verified', true);
 
-            wp_send_json(['status' => 'ok'], 200);
+                Plugin::log(true)->info("User #{$user->ID} ({$user->user_email}) verified", $info->toArray());
+                wp_send_json(['status' => 'ok'], 200);
+            } catch (Exception $exception) {
+                Plugin::log(true)->error($exception->getMessage());
+                Plugin::log()->debug($exception->getMessage(), [
+                    'code' => $exception->getCode(),
+                    'file' => $exception->getFile(),
+                    'line' => $exception->getLine(),
+                    'trace' => $exception->getTrace(),
+                ]);
+                wp_send_json(['status' => 'error', 'message' => $exception->getMessage()], 500);
+            }
         }
     }
 

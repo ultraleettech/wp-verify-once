@@ -23,11 +23,13 @@ class ComposerStaticInit93ff6d8c7db9cacc138ce185d6ad3047
         ),
         'P' => 
         array (
+            'Psr\\Log\\' => 8,
             'Psr\\Http\\Message\\' => 17,
         ),
         'M' => 
         array (
             'MyCLabs\\Enum\\' => 13,
+            'Monolog\\' => 8,
         ),
         'G' => 
         array (
@@ -58,6 +60,10 @@ class ComposerStaticInit93ff6d8c7db9cacc138ce185d6ad3047
         array (
             0 => __DIR__ . '/..' . '/ultraleet/verify-once/src',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'Psr\\Http\\Message\\' => 
         array (
             0 => __DIR__ . '/..' . '/psr/http-message/src',
@@ -65,6 +71,10 @@ class ComposerStaticInit93ff6d8c7db9cacc138ce185d6ad3047
         'MyCLabs\\Enum\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/php-enum/src',
+        ),
+        'Monolog\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/monolog/monolog/src/Monolog',
         ),
         'GuzzleHttp\\Psr7\\' => 
         array (

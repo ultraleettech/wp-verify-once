@@ -13,7 +13,8 @@
     "require": {
         "ultraleet/wp-requirements-checker": "^1.0",
         "ultraleet/verify-once": "^1.0",
-        "ultraleet/wp-settings": "^0.1.0"
+        "ultraleet/wp-settings": "^0.1.0",
+        "monolog/monolog": "^2.0"
     },
     "autoload": {
         "psr-4": {
