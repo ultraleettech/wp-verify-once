@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6a62466f151535eb2436cee9fccc50d",
+    "content-hash": "d5c0fb65c9731f64cebbd8aae4e2fc31",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -376,19 +376,20 @@
         },
         {
             "name": "ultraleet/verify-once",
-            "version": "dev-master",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ultraleettech/verify-once.git",
-                "reference": "fc9628be31081632999340d885d408e1674076db"
+                "reference": "de6304283a9f994152468963154384e60b2d70d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ultraleettech/verify-once/zipball/fc9628be31081632999340d885d408e1674076db",
-                "reference": "fc9628be31081632999340d885d408e1674076db",
+                "url": "https://api.github.com/repos/ultraleettech/verify-once/zipball/de6304283a9f994152468963154384e60b2d70d4",
+                "reference": "de6304283a9f994152468963154384e60b2d70d4",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "^1.6",
                 "firebase/php-jwt": "^5.0",
                 "guzzlehttp/guzzle": "^6.3",
                 "myclabs/php-enum": "^1.7",
@@ -414,7 +415,7 @@
                 }
             ],
             "description": "VerifyOnce verification service integration library.",
-            "time": "2019-10-09T13:42:19+00:00"
+            "time": "2019-10-20T15:47:25+00:00"
         },
         {
             "name": "ultraleet/wp-requirements-checker",
@@ -489,9 +490,7 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "ultraleet/verify-once": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

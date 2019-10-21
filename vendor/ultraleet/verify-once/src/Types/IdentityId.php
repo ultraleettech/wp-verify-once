@@ -1,0 +1,49 @@
+<?php
+
+namespace Ultraleet\VerifyOnce\Types;
+
+use MyCLabs\Enum\Enum;
+
+class IdentityId extends Enum
+{
+    private const PASSPORT = 'PASSPORT';
+    private const DRIVING_LICENCE = 'DRIVING_LICENCE';
+    private const ID_CARD = 'ID_CARD';
+    private const VISA = 'VISA';
+    private const UK_BIOMETRIC_RESIDENCE_PERMIT = 'UK_BIOMETRIC_RESIDENCE_PERMIT';
+    private const TAX_ID = 'TAX_ID';
+    private const VOTER_ID = 'VOTER_ID';
+    private const RESIDENCE_PERMIT = 'RESIDENCE_PERMIT';
+    private const WORK_PERMIT = 'WORK_PERMIT';
+    private const BANK_STATEMENT = 'BANK_STATEMENT';
+    private const UNKNOWN = 'UNKNOWN';
+    private const BIRTH_CERTIFICATE = 'BIRTH_CERTIFICATE';
+    private const NATIONAL_INSURANCE_CARD = 'NATIONAL_INSURANCE_CARD';
+    private const GOVERNMENT_LETTER = 'GOVERNMENT_LETTER';
+    private const P45_P60 = 'P45_P60';
+    private const PAYSLIP = 'PAYSLIP';
+    private const BANK_BUILDING_SOCIETY_STATEMENT = 'BANK_BUILDING_SOCIETY_STATEMENT';
+    private const UTILITY_BILL_ELECTRIC = 'UTILITY_BILL_ELECTRIC';
+    private const UTILITY_BILL_GAS = 'UTILITY_BILL_GAS';
+    private const UTILITY_BILL_OTHER = 'UTILITY_BILL_OTHER';
+    private const NON_UK_DRIVING_LICENCE = 'NON_UK_DRIVING_LICENCE';
+    private const UK_DRIVING_LICENCE = 'UK_DRIVING_LICENCE';
+    private const MOTORCYCLE_INSURANCE = 'MOTORCYCLE_INSURANCE';
+    private const CBT = 'CBT';
+    private const MARRIAGE_CERTIFICATE = 'MARRIAGE_CERTIFICATE';
+    private const NATURALISATION_CERTIFICATE = 'NATURALISATION_CERTIFICATE';
+    private const CHARACTER_REFERENCE = 'CHARACTER_REFERENCE';
+    private const STATEMENT_FACT = 'STATEMENT_FACT';
+    private const EDUCATIONAL_STATEMENT = 'EDUCATIONAL_STATEMENT';
+    private const PASSPORT_CARD = 'PASSPORT_CARD';
+    private const CERTIFICATE_OF_NATURALISATION = 'CERTIFICATE_OF_NATURALISATION';
+    private const IMMIGRATION_STATUS_DOCUMENT = 'IMMIGRATION_STATUS_DOCUMENT';
+    private const HOME_OFFICE_LETTER = 'HOME_OFFICE_LETTER';
+    private const UTILITY_BILL = 'UTILITY_BILL';
+    private const COUNCIL_TAX = 'COUNCIL_TAX';
+    private const BENEFIT_LETTERS = 'BENEFIT_LETTERS';
+    private const CREDIT_CARD_STATEMENT = 'CREDIT_CARD_STATEMENT';
+    private const PROFESSIONAL_IDENTIFICATION_CARD = 'PROFESSIONAL_IDENTIFICATION_CARD';
+    private const SOCIAL_SECURITY_CARD = 'SOCIAL_SECURITY_CARD';
+    private const POSTAL_IDENTITY_CARD = 'POSTAL_IDENTITY_CARD';
+}
