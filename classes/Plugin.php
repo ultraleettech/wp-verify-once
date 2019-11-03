@@ -48,10 +48,10 @@ final class Plugin
         return self::$instance;
     }
 
-    public static function log(bool $callback = false): LoggerInterface
+    public static function log(bool $callbackLog = false): LoggerInterface
     {
         $manager = self::$instance->getLogManager();
-        return $callback ? $manager->getCallbackLogger() : $manager->getLogger();
+        return $callbackLog ? $manager->getCallbackLogger() : $manager->getLogger();
     }
 
     public function init()

@@ -2,7 +2,9 @@
 /**
  * @var string $url
  * @var string $transactionId
+ * @var string|null $type
  */
+$type = $type ?? 'custom';
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -39,6 +41,7 @@
     setInterval(function() {
         $.post('<?= admin_url( 'admin-ajax.php' ) ?>', {
             action: 'verifyOnceCheckStatus',
+            type: '<?= $type ?>',
             transactionId: '<?= $transactionId ?>'
         }, function (data) {
             if ('verified' === data.status) {

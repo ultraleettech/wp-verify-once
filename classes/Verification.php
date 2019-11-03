@@ -19,7 +19,9 @@ class Verification
     public function __construct()
     {
         add_action('wp_login', [$this, 'loginVerification'], -1337, 2);
+        add_filter('verify_once_init_custom_verification', [$this, 'customVerification']);
         add_action('init', [$this, 'callback']);
+        add_action('wp_ajax_verifyOnceCheckStatus', [$this, 'checkVerificationStatus']);
         add_action('wp_ajax_nopriv_verifyOnceCheckStatus', [$this, 'checkVerificationStatus']);
     }
 
@@ -28,25 +30,26 @@ class Verification
      *
      * @param string $login
      * @param WP_User $user
+     *
+     * @todo Refactor: extract common code
      */
     public function loginVerification(string $login, WP_User $user)
     {
         if (
             is_array($user->roles) && // sanity check
-            !in_array( 'administrator', $user->roles) &&  // admins are exempt
+            !in_array('administrator', $user->roles) &&  // admins are exempt
             !get_user_meta($user->ID, '_vo_verified', true) && // unverified user
             $this->getApi()->active() && // api credentials need to be set
-            //$this->getSettings()->getSettingValue('enabled', 'login', 'verify') && // login verification enabled
+            $this->getSettings()->getSettingValue('enabled', 'login', 'verify') && // login verification enabled
             $response = $this->getApi()->initiate()
         ) {
-            $url = $response->getUrl();
             $transactionId = $response->getTransactionId();
-
             update_user_meta($user->ID, '_vo_transaction_id', $transactionId);
-
             wp_logout();
 
-            include(ULTRALEET_VO_TEMPLATE_PATH . 'verify-login.php');
+            $url = $response->getUrl();
+            $type = 'login';
+            include(ULTRALEET_VO_TEMPLATE_PATH . 'verify-once-iframe.php');
 
             Plugin::log()->info(
                 "Initiated login verification for user #{$user->ID} ({$user->user_email})",
@@ -57,9 +60,37 @@ class Verification
     }
 
     /**
+     * @param $dummy
+     * @return string|false Transaction ID if successful, false otherwise.
+     *
+     * @todo Refactor: extract common code
+     */
+    public function customVerification($dummy)
+    {
+        if (
+            $this->getApi()->active() && // api credentials need to be set
+            $this->getSettings()->getSettingValue('enabled', 'custom', 'verify') && // custom verification enabled
+            $response = $this->getApi()->initiate()
+        ) {
+            $transactionId = $response->getTransactionId();
+            $url = $response->getUrl();
+            include(ULTRALEET_VO_TEMPLATE_PATH . 'verify-once-iframe.php');
+
+            Plugin::log()->info(
+                'Initiated custom verification',
+                $response->toArray()
+            );
+            return $transactionId;
+        }
+        return $dummy;
+    }
+
+    /**
      * Verification callback entry point.
      *
      * @throws Exception
+     *
+     * @todo Refactor
      */
     public function callback()
     {
@@ -71,23 +102,34 @@ class Verification
                     throw new Exception("Error verifying transaction payload.");
                 }
                 $transactionId = $info->transaction->id;
-                $user = $this->getUserByTransactionId($transactionId);
-                if (!$this->verifyUser($user, $info)) {
-                    throw new Exception("Unable to verify user #{$user->ID}.");
-                }
-                update_user_meta($user->ID, '_vo_callback_info', $info->toArray());
-                update_user_meta($user->ID, '_vo_verified', true);
+                if ($user = $this->getUserByTransactionId($transactionId)) {
+                    // Login verification
+                    if (!$this->verifyUser($user, $info)) {
+                        throw new Exception("Unable to verify user #{$user->ID}.");
+                    }
+                    update_user_meta($user->ID, '_vo_callback_info', $info->toArray());
+                    update_user_meta($user->ID, '_vo_verified', true);
 
-                Plugin::log(true)->info("User #{$user->ID} ({$user->user_email}) verified", $info->toArray());
+                    Plugin::log(true)->info("User #{$user->ID} ({$user->user_email}) verified", $info->toArray());
+                } else {
+                    // Custom verification
+                    if (!apply_filters('verify_once_verify_transaction', $info)) {
+                        throw new Exception("Custom verification failed for transaction $transactionId");
+                    }
+                    Plugin::log(true)->info('Verification succeeded', $info->toArray());
+                }
                 wp_send_json(['status' => 'ok'], 200);
             } catch (Exception $exception) {
                 Plugin::log(true)->error($exception->getMessage());
-                Plugin::log()->debug($exception->getMessage(), [
-                    'code' => $exception->getCode(),
-                    'file' => $exception->getFile(),
-                    'line' => $exception->getLine(),
-                    'trace' => $exception->getTrace(),
-                ]);
+                Plugin::log()->debug(
+                    $exception->getMessage(),
+                    [
+                        'code' => $exception->getCode(),
+                        'file' => $exception->getFile(),
+                        'line' => $exception->getLine(),
+                        'trace' => $exception->getTrace(),
+                    ]
+                );
                 wp_send_json(['status' => 'error', 'message' => $exception->getMessage()], 500);
             }
         }
@@ -96,13 +138,12 @@ class Verification
     /**
      * @param string $transactionId
      * @return mixed
-     * @throws Exception
      */
-    protected function getUserByTransactionId(string $transactionId): WP_User
+    protected function getUserByTransactionId(string $transactionId)
     {
         $users = get_users(['meta_key' => '_vo_transaction_id', 'meta_value' => $transactionId]);
         if (is_wp_error($users) || empty($users)) {
-            throw new Exception("Unable to find user with verification transaction '$transactionId'.");
+            return null;
         }
         $user = current($users);
         return $user;
@@ -125,10 +166,13 @@ class Verification
         if (is_null($info->identityVerification)) {
             return false;
         }
-        if ((string) VerificationStatus::VERIFIED() !== (string) $info->identityVerification->status) {
+        if ((string)VerificationStatus::VERIFIED() !== (string)$info->identityVerification->status) {
             return false;
         }
-        if ($user->user_email !== $info->getUser()->email) {
+        if (in_array(
+                'email',
+                $this->getSettings()->getSettingValue('fields', 'login', 'verify')
+            ) && $user->user_email !== $info->getUser()->email) {
             return false;
         }
         return true;
@@ -139,20 +183,26 @@ class Verification
      */
     public function checkVerificationStatus()
     {
-        if ($transactionId = $_REQUEST['transactionId']) {
+        if ($transactionId = $_REQUEST['transactionId'] && $type = $_REQUEST['type']) {
             try {
-                $user = $this->getUserByTransactionId($transactionId);
+                if ('login' === $type) {
+                    $user = $this->getUserByTransactionId($transactionId);
+                    $isVerified = get_user_meta($user->ID, '_vo_verified', true);
+                } elseif ('custom' === $type) {
+                    $isVerified = apply_filters('verify_once_is_verified', $transactionId);
+                } else {
+                    throw new Exception("Invalid verification type '$type'.");
+                }
             } catch (Exception $exception) {
                 wp_send_json(['status' => 'error', 'message' => $exception->getMessage()]);
             }
-            $isVerified = get_user_meta($user->ID, '_vo_verified', true);
             $response = ['status' => $isVerified ? 'verified' : 'pending'];
             if ($isVerified) {
-                $response['redirect'] = wp_login_url();
+                $response['redirect'] = is_string($isVerified) ? $isVerified : wp_login_url();
             }
             wp_send_json($response);
         }
-        wp_send_json(['status' => 'error', 'message' => 'Transaction ID missing!']);
+        wp_send_json(['status' => 'error', 'message' => 'Transaction ID or verification type missing!']);
     }
 
     protected function getApi(): ApiManager

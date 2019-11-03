@@ -47,7 +47,6 @@ return [
             ],
         ],
     ],
-    /***
     'verify' => [
         'title' => __('Verification', ULTRALEET_VO_TEXTDOMAIN),
         'sections' => [
@@ -69,11 +68,24 @@ return [
                         'options' => [
                             'email' => __('User email', ULTRALEET_VO_TEXTDOMAIN),
                         ],
+                        'default' => true,
                     ],
                 ],
-                'onSave' => 'verify_once_save_settings',
+            ],
+            'custom' => [
+                'fields' => [
+                    'header' => [
+                        'type' => 'section_header',
+                        'title' => __('Custom verification', ULTRALEET_VO_TEXTDOMAIN),
+                        'text' => __('Configure VerifyOnce custom verification.', ULTRALEET_VO_TEXTDOMAIN),
+                    ],
+                    'enabled' => [
+                        'type' => 'checkbox',
+                        'label' => __('Enabled', ULTRALEET_VO_TEXTDOMAIN),
+                        'description' => __('Whether or not custom verification is enabled', ULTRALEET_VO_TEXTDOMAIN),
+                    ],
+                ],
             ],
         ],
     ],
-    ***/
 ];
